@@ -100,7 +100,7 @@ var_default_value() {
                     Default="'${DETECTED_PUID}'"
                     ;;
                 TZ)
-                    Default="'$(cat /etc/timezone)'"
+                    Default="'$(timedatectl show --property=Timezone --value)'"
                     ;;
                 *)
                     if [[ -f ${COMPOSE_ENV_DEFAULT_FILE} ]] && run_script 'env_var_exists' "${CleanVarName}" "${COMPOSE_ENV_DEFAULT_FILE}"; then
