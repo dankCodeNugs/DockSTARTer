@@ -17,7 +17,7 @@ get_docker() {
 }
 
 command_get_docker() {
-    dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 }
 
 test_get_docker() {
