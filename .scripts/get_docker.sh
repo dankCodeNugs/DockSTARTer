@@ -17,22 +17,7 @@ get_docker() {
 }
 
 command_get_docker() {
-    # https://github.com/docker/docker-install
-    local MKTEMP_GET_DOCKER
-    local COMMAND
-    #shellcheck disable=SC2034 # (warning): MKTEMP_GET_DOCKER appears unused. Verify use (or export if used externally).
-    MKTEMP_GET_DOCKER=$(mktemp) || fatal "Failed to create temporary docker install script.\nFailing command: ${F[C]}mktemp"
-    info "Downloading docker install script."
-    #shellcheck disable=SC2016 # (info): Expressions don't expand in single quotes, use double quotes for that.
-    COMMAND='curl -fsSL https://get.docker.com -o "${MKTEMP_GET_DOCKER}"'
-    eval "${COMMAND}" || fatal "Failed to get docker install script.\nFailing command: ${F[C]}${COMMAND}"
-    info "Running docker install script."
-    #shellcheck disable=SC2016 # (info): Expressions don't expand in single quotes, use double quotes for that.
-    COMMAND='sh ${MKTEMP_GET_DOCKER}'
-    eval "${COMMAND}" || fatal "Failed to install docker.\nFailing command: ${F[C]}${COMMAND}"
-    #shellcheck disable=SC2016 # (info): Expressions don't expand in single quotes, use double quotes for that.
-    COMMAND='rm -f "${MKTEMP_GET_DOCKER}"'
-    eval "${COMMAND}" || warn "Failed to remove temporary docker install script.\nFailing command: ${F[C]}${COMMAND}"
+    dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 }
 
 test_get_docker() {
